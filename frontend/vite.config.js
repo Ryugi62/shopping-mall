@@ -1,7 +1,13 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc'
 
-// https://vite.dev/config/
-export default defineConfig({
-  plugins: [react()],
-})
+export default defineConfig(({ mode }) => {
+  console.log(`Current Mode: ${mode}`);
+
+  return {
+    plugins: [react()],
+    define: {
+      'process.env.NODE_ENV': JSON.stringify(mode), // Node.js와 일관성 유지
+    },
+  };
+});
